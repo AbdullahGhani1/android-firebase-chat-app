@@ -12,6 +12,10 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.view.View;
+
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,12 +31,20 @@ public class MainActivity extends AppCompatActivity {
     private EditText mMessageEditText;
     private Button mSendButton;
     private String mUsername;
+//EntryPoint app Access to Firebase Database
+    private FirebaseDatabase mFirebaseDatabase;
+    private DatabaseReference mMessagesDatabaseReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mUsername = Anonymous;
+
+        mFirebaseDatabase =FirebaseDatabase.getInstance();
+        mMessagesDatabaseReference =mFirebaseDatabase.getReference().child("messages");
+
+
 //        Initialize reference to Views
         mMessageListView = findViewById(R.id.messageListView);
         mMessageEditText = findViewById(R.id.messageEditText);
